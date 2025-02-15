@@ -1,4 +1,13 @@
-build/bin
-node_modules
-frontend/dist
+# Binaries and build output
+build/
+
+# Environment files
 .env
+
+# Node.js dependencies
+frontend/node_modules/
+frontend/build/
+frontend/dist
+
+# Logs
+*.log
