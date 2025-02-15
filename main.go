@@ -5,6 +5,7 @@ import (
 	"embed"
 	"fmt"
 	_ "github.com/lib/pq"
+	"todo-test/task"
 
 	"github.com/joho/godotenv"
 	"log"
@@ -47,7 +48,11 @@ func main() {
 	}
 
 	fmt.Println("Database connection successful!")
-	app := NewApp()
+
+	repo := task.NewRepository(db)
+	service := task.NewService(repo)
+
+	app := NewApp(&service)
 
 	// Create application with options
 	err = wails.Run(&options.App{

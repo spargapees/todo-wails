@@ -3,16 +3,20 @@ package main
 import (
 	"context"
 	"fmt"
+	"todo-test/task"
 )
 
 // App struct
 type App struct {
-	ctx context.Context
+	ctx  context.Context
+	repo task.Repository
 }
 
 // NewApp creates a new App application struct
-func NewApp() *App {
-	return &App{}
+func NewApp(repo *task.Service) *App {
+	return &App{
+		repo: *repo,
+	}
 }
 
 // startup is called when the app starts. The context is saved
