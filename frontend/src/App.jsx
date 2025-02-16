@@ -78,7 +78,7 @@ function App() {
         const newTask = { ...task, done: !task.done };
         try {
             await Update(newTask);
-            // Re-fetch tasks based on the current filter
+
             if (activeFilter === "all") {
                 fetchTasks();
             } else if (activeFilter === "done") {

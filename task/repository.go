@@ -37,7 +37,6 @@ func (r *repository) GetAllDone() ([]Task, error) {
 			return nil, fmt.Errorf("error scanning row: %w", err)
 		}
 
-		// Properly format the log message
 		log.Printf("Each task: Title=%s, Description=%s", task.Title, task.Description)
 		tasks = append(tasks, task)
 	}
@@ -67,7 +66,6 @@ func (r *repository) GetAllTodo() ([]Task, error) {
 			return nil, fmt.Errorf("error scanning row: %w", err)
 		}
 
-		// Properly format the log message
 		log.Printf("Each task: Title=%s, Description=%s", task.Title, task.Description)
 		tasks = append(tasks, task)
 	}
@@ -112,7 +110,6 @@ func (r *repository) GetAll() ([]Task, error) {
 			return nil, fmt.Errorf("error scanning row: %w", err)
 		}
 
-		// Properly format the log message
 		log.Printf("Each task: Title=%s, Description=%s", task.Title, task.Description)
 		tasks = append(tasks, task)
 	}
@@ -161,7 +158,6 @@ func (r *repository) Delete(id int) error {
 		return err
 	}
 
-	// Optionally check if a row was actually deleted
 	rowsAffected, err := result.RowsAffected()
 	if err != nil {
 		return err

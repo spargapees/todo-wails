@@ -19,7 +19,7 @@ import (
 var assets embed.FS
 
 func main() {
-	// Create an instance of the app structure
+
 	if err := godotenv.Load(); err != nil {
 		log.Fatalf("Error loading .env file: %v", err)
 	}
@@ -28,7 +28,6 @@ func main() {
 		panic(fmt.Sprintf("Failed to load configuration: %v", err))
 	}
 
-	// Open the database connection
 	db, err := sql.Open("postgres", cfg.DSN())
 	if err != nil {
 		log.Fatalf("Failed to connect to PostgreSQL: %v", err)
@@ -41,13 +40,6 @@ func main() {
 	}
 
 	fmt.Println("Successfully connected to PostgreSQL!")
-
-	// Test the connection
-	if err := db.Ping(); err != nil {
-		panic(fmt.Sprintf("Database connection failed: %v", err))
-	}
-
-	fmt.Println("Database connection successful!")
 
 	repo := task.NewRepository(db)
 	service := task.NewService(repo)

@@ -37,21 +37,6 @@ func (h *Handler) GetAllTodo() ([]Task, error) {
 	return tasks, nil
 }
 
-/*
-func (h *Handler) GetAll() (map[string]string, error) {
-	return map[string]string{"message": "Hello, world!"}, nil
-
-	tasks, err := h.services.GetAll()
-
-	if err != nil {
-		newErrorResponse(c, http.StatusInternalServerError, err.Error())
-		return
-	}
-
-	c.JSON(http.StatusOK, tasks)
-
-*/
-
 func (h *Handler) Update(task Task) {
 	err := h.services.Update(task)
 	if err != nil {
