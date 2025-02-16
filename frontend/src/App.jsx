@@ -39,7 +39,7 @@ function App() {
 
     const addTask = async () => {
         if (!newTaskTitle || !newTaskPriority || !newTaskDeadline) {
-            alert("All fields are required!");
+            alert("Title and Deadline fields are required!");
             return;
         }
 
