@@ -30,7 +30,19 @@ Clone the repository to your local machine:
 git clone https://github.com/spargapees/todo-wails.git
 cd todo-wails
 ```
-### 2. Set up PostgreSQL Docker container
+
+### 2. Create a .env file
+Create a .env file in the root directory of the project and add the following environment variables:
+
+```bash
+DB_HOST=localhost
+DB_PORT=5432
+DB_USER=postgres
+DB_PASSWORD=secret
+DB_NAME=todo-test
+```
+This file contains the database connection settings for the application.
+### 3. Set up PostgreSQL Docker container
 Run the following command to start the PostgreSQL container:
 
 ```bash
@@ -38,13 +50,13 @@ make postgres
 ```
 This will run a Docker container with the PostgreSQL database.
 
-### 3. Apply Database Migrations
+### 4. Apply Database Migrations
 Run the following command to apply the migrations and set up the database schema:
 
 ```bash
 make migrationup
 ```
-### 4. Start the Application
+### 5. Start the Application
 After setting up the database, start the Wails application with the following command:
 
 ```bash
@@ -52,7 +64,7 @@ make wails
 ```
 This will compile the application and open the interface in your default web browser.
 
-Commands Overview
+## Commands Overview
 
 ```bash 
 make postgres
