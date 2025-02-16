@@ -46,6 +46,8 @@ function App() {
 
     // Delete a task
     const deleteTask = async (id) => {
+        const isConfirmed = window.confirm("Are you sure you want to delete this task?");
+        if (!isConfirmed) return;
         try {
             await Delete(id);
             fetchTasks();
@@ -56,8 +58,18 @@ function App() {
 
     // Update a task's completion status
     const toggleTaskStatus = async (task) => {
+
+        const newTask = {
+            title: task.title,
+            description: task.description,
+            priority: task.priority,
+            deadline: task.deadline,
+            id: task.id,
+            done: !task.done,
+        };
+
         try {
-            await Update({ ...task, done: !task.done });
+            await Update(newTask);
             fetchTasks();
         } catch (error) {
             console.error("Error updating task:", error);

@@ -1,9 +1,7 @@
 package task
 
 import (
-	"github.com/gin-gonic/gin"
 	"log"
-	"net/http"
 )
 
 type Handler struct {
@@ -38,24 +36,18 @@ func (h *Handler) GetAll() (map[string]string, error) {
 
 */
 
-func (h *Handler) Update(c *gin.Context) {
-	var input Task
-
-	if err := c.BindJSON(&input); err != nil {
-		newErrorResponse(c, http.StatusBadRequest, err.Error())
-		return
+func (h *Handler) Update(task Task) {
+	err := h.services.Update(task)
+	if err != nil {
+		log.Print("update task failed")
 	}
-
-	if err := h.services.Update(input); err != nil {
-		newErrorResponse(c, http.StatusInternalServerError, err.Error())
-		return
-	}
-
-	c.JSON(http.StatusOK, statusResponse{"ok"})
 }
 
 func (h *Handler) Delete(id int) {
-	h.services.Delete(id)
+	err := h.services.Delete(id)
+	if err != nil {
+		log.Print("delete task failed")
+	}
 }
 
 func NewHandler(services Service) *Handler {
