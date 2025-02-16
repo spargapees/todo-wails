@@ -18,6 +18,6 @@ wails:
 
 dev: postgres migrateup wails
 
-start: postgres createdb migrateup wails
+start: postgres migrateup wails
 
 .PHONY: postgres createdb dropdb migrateup migratedown wails dev

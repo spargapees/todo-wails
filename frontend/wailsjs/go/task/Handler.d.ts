@@ -8,4 +8,8 @@ export function Delete(arg1:number):Promise<void>;
 
 export function GetAll():Promise<Array<task.Task>>;
 
+export function GetAllDone():Promise<Array<task.Task>>;
+
+export function GetAllTodo():Promise<Array<task.Task>>;
+
 export function Update(arg1:task.Task):Promise<void>;

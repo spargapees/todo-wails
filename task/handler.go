@@ -21,6 +21,22 @@ func (h *Handler) GetAll() ([]Task, error) {
 	return tasks, nil
 }
 
+func (h *Handler) GetAllDone() ([]Task, error) {
+	tasks, err := h.services.GetAllDone()
+	if err != nil {
+		return nil, err
+	}
+	return tasks, nil
+}
+
+func (h *Handler) GetAllTodo() ([]Task, error) {
+	tasks, err := h.services.GetAllTodo()
+	if err != nil {
+		return nil, err
+	}
+	return tasks, nil
+}
+
 /*
 func (h *Handler) GetAll() (map[string]string, error) {
 	return map[string]string{"message": "Hello, world!"}, nil

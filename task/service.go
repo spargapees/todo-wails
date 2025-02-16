@@ -10,9 +10,21 @@ type Service interface {
 	GetAll() ([]Task, error)
 	Update(task Task) error
 	Delete(id int) error
+	GetAllDone() ([]Task, error)
+	GetAllTodo() ([]Task, error)
 }
 type service struct {
 	repos Repository
+}
+
+func (s service) GetAllTodo() ([]Task, error) {
+	log.Print(fmt.Sprintf("Getall done task"))
+	return s.repos.GetAllTodo()
+}
+
+func (s service) GetAllDone() ([]Task, error) {
+	log.Print(fmt.Sprintf("Getall todo task"))
+	return s.repos.GetAllDone()
 }
 
 func (s service) Add(task Task) (Task, error) {

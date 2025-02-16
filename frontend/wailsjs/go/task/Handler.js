@@ -14,6 +14,14 @@ export function GetAll() {
   return window['go']['task']['Handler']['GetAll']();
 }
 
+export function GetAllDone() {
+  return window['go']['task']['Handler']['GetAllDone']();
+}
+
+export function GetAllTodo() {
+  return window['go']['task']['Handler']['GetAllTodo']();
+}
+
 export function Update(arg1) {
   return window['go']['task']['Handler']['Update'](arg1);
 }

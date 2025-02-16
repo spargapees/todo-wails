@@ -11,10 +11,72 @@ type Repository interface {
 	GetAll() ([]Task, error)
 	Update(task Task) error
 	Delete(id int) error
+	GetAllDone() ([]Task, error)
+	GetAllTodo() ([]Task, error)
 }
 
 type repository struct {
 	db *sql.DB
+}
+
+func (r *repository) GetAllDone() ([]Task, error) {
+	log.Print("Printing all tasks from getall func")
+	var tasks []Task
+	query := "SELECT id, title, description, priority, deadline, done, created_at FROM tasks WHERE done=true ORDER BY created_at DESC"
+	rows, err := r.db.Query(query)
+	if err != nil {
+		return nil, fmt.Errorf("error executing query: %w", err)
+	}
+	log.Print("Query executed successfully")
+	defer rows.Close()
+
+	for rows.Next() {
+		var task Task
+		err := rows.Scan(&task.Id, &task.Title, &task.Description, &task.Priority, &task.Deadline, &task.Done, &task.CreatedAt)
+		if err != nil {
+			return nil, fmt.Errorf("error scanning row: %w", err)
+		}
+
+		// Properly format the log message
+		log.Printf("Each task: Title=%s, Description=%s", task.Title, task.Description)
+		tasks = append(tasks, task)
+	}
+
+	if err = rows.Err(); err != nil {
+		return nil, fmt.Errorf("error after iterating rows: %w", err)
+	}
+
+	return tasks, nil
+}
+
+func (r *repository) GetAllTodo() ([]Task, error) {
+	log.Print("Printing all tasks from getall func")
+	var tasks []Task
+	query := "SELECT id, title, description, priority, deadline, done, created_at FROM tasks WHERE done=false ORDER BY created_at DESC"
+	rows, err := r.db.Query(query)
+	if err != nil {
+		return nil, fmt.Errorf("error executing query: %w", err)
+	}
+	log.Print("Query executed successfully")
+	defer rows.Close()
+
+	for rows.Next() {
+		var task Task
+		err := rows.Scan(&task.Id, &task.Title, &task.Description, &task.Priority, &task.Deadline, &task.Done, &task.CreatedAt)
+		if err != nil {
+			return nil, fmt.Errorf("error scanning row: %w", err)
+		}
+
+		// Properly format the log message
+		log.Printf("Each task: Title=%s, Description=%s", task.Title, task.Description)
+		tasks = append(tasks, task)
+	}
+
+	if err = rows.Err(); err != nil {
+		return nil, fmt.Errorf("error after iterating rows: %w", err)
+	}
+
+	return tasks, nil
 }
 
 func (r *repository) Add(task Task) (Task, error) {
