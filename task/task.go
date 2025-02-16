@@ -3,11 +3,11 @@ package task
 import "time"
 
 type Task struct {
-	id          int
-	title       string
-	description string
-	done        bool
-	priority    string
-	createdAt   time.Time
-	deadline    time.Time
+	Id          int       `json:"id,omitempty"`
+	Title       string    `json:"title"`
+	Description string    `json:"description"`
+	Done        bool      `json:"done"`
+	Priority    string    `json:"priority"`
+	CreatedAt   time.Time `json:"created_at"`
+	Deadline    time.Time `json:"deadline"`
 }

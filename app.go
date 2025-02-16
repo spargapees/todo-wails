@@ -8,14 +8,14 @@ import (
 
 // App struct
 type App struct {
-	ctx  context.Context
-	repo task.Repository
+	ctx     context.Context
+	handler *task.Handler
 }
 
 // NewApp creates a new App application struct
-func NewApp(repo *task.Service) *App {
+func NewApp(handler *task.Handler) *App {
 	return &App{
-		repo: *repo,
+		handler: handler,
 	}
 }
 
