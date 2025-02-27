@@ -1,38 +1,79 @@
-# ToDo Application
+# ToDo Приложение
 
-A simple ToDo application built using Wails, React, and PostgreSQL. This app allows you to manage tasks with features like setting deadlines, priorities, and task status (Todo/Done).
+Простое ToDo приложение, созданное с использованием Wails, React и PostgreSQL. Это приложение позволяет управлять задачами: создавать их, указывать приоритет и срок выполнения задачи, ставить отметку(Todo/Done), менять и удалять.
+Все данные хранятся в локальном базе данных и не теряются при повторном запуске приложения.
 
-## Features
+## Функции
 
-- Add, edit, and delete tasks
-- Set deadlines and priorities
-- Toggle task status between Todo and Done
-- User-friendly interface with color-coded task priorities
+![Экран1](images/todo-test-screen1.png)
+- Интерфейс с текстовым полем для ввода новой задачи
+- Кнопка для добавления задачи в список
+- Отображение всех задач на экране
+- Использование CSS для стилизации интерфейса
+- Использование значков для обозначения выполненных и невыполненных задач
 
-## Requirements
+![Экран2](images/todo-test-screen3.png)
+- Возможность добавления приоритета задачи
+- Приоритеты обозначены цветами:
+    - **highest** (Наивысший) - Красный
+    - **high** (Высокий) - Оранжевый
+    - **medium** (Средний) - Синий
+    - **low** (Низкий) - Бирюзовый
+    - **lowest** (Самый низкий) - Зеленый
 
-Before running the application, make sure you have the following installed:
+![Экран3](images/todo-test-screen2.png)
+- Возможность добавлять задачи с указанием даты и времени выполнения.
+
+![Экран4](images/todo-test-screen4.png)
+- Рабочий функционал добавления задачи
+
+![Экран5](images/todo-test-screen5.png)
+- Валидация ввода
+
+![Экран5](images/todo-test-screen10.png)
+![Экран5](images/todo-test-screen11.png)
+- Кнопка для изменения задачи.
+- Функционал для изменения названия, описания, приоритета и срока выполения задачи.
+
+
+![Экран6](images/todo-test-screen12.png)
+- Рабочий функционал удаления задачи
+- Подтверждение удаления задачи (модальное окно)
+
+![Экран7](images/todo-test-screen7.png)
+- Возможность отмечать задачу как выполненную.
+- Зачеркивание текста выполненных задач.
+- Возможность отмены отметки выполнения задачи.
+
+![Экран8](images/todo-test-screen8.png)
+![Экран9](images/todo-test-screen9.png)
+- Перемещение выполненных задач в отдельный раздел "Done".
+- Все невыполненные задачи находятся в разделе "Todo".
+
+## Требования
+
+Перед запуском приложения убедитесь, что у вас установлены следующие зависимости:
 
 - [Docker](https://www.docker.com/get-started)
 - [Go](https://golang.org/dl/)
 - [Node.js](https://nodejs.org/)
 - [Wails](https://wails.io/)
 
-## Setup Instructions
+## Инструкции по установке
 
-Follow the steps below to set up the application locally.
+Следуйте приведенным ниже шагам для локального запуска приложения.
 
-### 1. Clone the repository
+### 1. Клонируйте репозиторий
 
-Clone the repository to your local machine:
+Клонируйте репозиторий на ваш локальный компьютер:
 
 ```bash
 git clone https://github.com/spargapees/todo-wails.git
 cd todo-wails
 ```
 
-### 2. Create a .env file
-Create a .env file in the root directory of the project and add the following environment variables:
+### 2. Создайте файл .env
+Создайте файл .env в корневом каталоге проекта и добавьте следующие переменные окружения:
 
 ```bash
 DB_HOST=localhost
@@ -41,59 +82,54 @@ DB_USER=postgres
 DB_PASSWORD=secret
 DB_NAME=todo-test
 ```
-This file contains the database connection settings for the application.
-### 3. Set up PostgreSQL Docker container
-Run the following command to start the PostgreSQL container:
-
+Этот файл содержит настройки подключения к базе данных.
+### Настройте контейнер PostgreSQL
+Выполните следующую команду для запуска контейнера PostgreSQL:
 ```bash
 make postgres
 ```
-This will run a Docker container with the PostgreSQL database.
+Эта команда запустит Docker-контейнер с базой данных PostgreSQL.
 
-### 4. Apply Database Migrations
-Run the following command to apply the migrations and set up the database schema:
-
+### 4. Примените миграции базы данных
+Выполните следующую команду для применения миграций и настройки схемы базы данных:
 ```bash
 make migrationup
 ```
-### 5. Start the Application
-After setting up the database, start the Wails application with the following command:
-
+### 5. Запустите приложение
+После настройки базы данных запустите приложение Wails с помощью следующей команды:
 ```bash
 make wails
 ```
-This will compile the application and open the interface in your default web browser.
-
-## Commands Overview
+Эта команда скомпилирует приложение и откроет интерфейс в вашем браузере по умолчанию.
+## Обзор команд
 
 ```bash 
 make postgres
 ```
-Starts the PostgreSQL Docker container.
+Запускает контейнер PostgreSQL.
 ```bash 
 make migrationup
 ```
-Applies database up migrations.
+Применяет миграции "up".
 ```bash 
 make migrationdown
 ```
-Applies database down migrations.
+Применяет миграции "down".
 ```bash 
 make wails
 ```
-Starts the Wails application.
+Запускает приложение Wails.
 ```bash
 make dropdb
 ```
-Drops the PostgreSQL database.
+Удаляет базу данных PostgreSQL.
 ```bash
 make createdb
 ```
-Creates the PostgreSQL database.
-
-## Troubleshooting
-If the database container is not running: You can start it manually with 
-```bach
+Создает базу данных PostgreSQL.
+## Устранение неполадок
+Если контейнер базы данных не запущен: Вы можете запустить его вручную с помощью команды: 
+```bash
 docker start todo-test-db
 ```
-If the application fails to run: Ensure all dependencies (Go, Wails, Node.js, Docker) are installed correctly.
+Если приложение не запускается: Убедитесь, что все зависимости (Go, Wails, Node.js, Docker) установлены правильно.
